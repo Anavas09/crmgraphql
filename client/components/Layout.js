@@ -22,11 +22,11 @@ function Layout({ children }) {
       </Head>
 
       {router.pathname === '/login' || router.pathname === '/newaccount' ? (
-        <div className="bg-gray-800 min-h-screen flex flex-col justify-center">
+        <div className="bg-green-800 min-h-screen flex flex-col justify-center">
           <div>{children}</div>
         </div>
       ) : (
-        <div className="bg-gray-200 min-h-screen">
+        <div className="bg-green-200 min-h-screen">
           <div className="flex min-h-screen">
             <Sidebar />
 
