@@ -1,28 +1,64 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useMutation, gql } from '@apollo/client';
 
 import Layout from '../components/Layout';
 
+const NEW_ACCOUNT = gql`
+  mutation newUser($input: UserInput) {
+    newUser(input: $input) {
+      id
+      name
+      lastname
+      age
+      email
+    }
+  }
+`;
+
 function NewAccount() {
+
+  //New Account Mutation
+  const [newUser] = useMutation(NEW_ACCOUNT);
 
   //Form Validations
   const formik = useFormik({
     initialValues: {
       name: '',
       lastname: '',
+      age: 18,
       email: '',
       password: '',
     },
     validationSchema: Yup.object({
       name: Yup.string().required('Add a name'),
       lastname: Yup.string().required('Add a lastname'),
+      age: Yup.number().required('Add a age'),
       email: Yup.string().email('Invalid email').required('Add a email'),
       password: Yup.string().required('Add a password').min(6, 'The password must be at least of 6 characters'),
     }),
-    onSubmit: values => {
+    onSubmit: async values => {
       console.log('SUBMITING');
       console.log(values);
+
+      const { name, lastname, age, email, password } = values;
+
+      try {
+        await newUser({
+          variables: {
+            input: {
+              name,
+              lastname,
+              email,
+              password,
+              age,
+            },
+          },
+        });
+      } catch (err) {
+        console.error(err)
+      }
     },
   });
 
@@ -35,6 +71,12 @@ function NewAccount() {
   const errorLastname = formik.touched.lastname && formik.errors.lastname && (
     <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
       <p className="font-bold">{formik.errors.lastname}</p>
+    </div>
+  );
+
+  const errorAge = formik.touched.age && formik.errors.age && (
+    <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+      <p className="font-bold">{formik.errors.age}</p>
     </div>
   );
 
@@ -102,6 +144,26 @@ function NewAccount() {
               </div>
 
               {errorLastname}
+
+              <div className="mb-4">
+                <label
+                  className="block text-green-700 text-sm font-bold mb-2"
+                  htmlFor="age"
+                >
+                  Age
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="age"
+                  type="number"
+                  placeholder="Age"
+                  value={formik.values.age}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+              </div>
+
+              {errorAge}
 
               <div className="mb-4">
                 <label
