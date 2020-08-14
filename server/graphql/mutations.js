@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const Client = require("../database/models/Client");
 const Order = require("../database/models/Order");
 const Product = require("../database/models/Product");
+const User = require("../database/models/User");
 
 const secretWord = process.env.SECRET_WORD;
 

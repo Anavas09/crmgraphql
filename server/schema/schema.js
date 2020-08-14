@@ -8,7 +8,7 @@ const typeDefs = gql`
   type Client {
     id: ID
     name: String
-    lastName: String
+    lastname: String
     email: String
     company: String
     phone: String
@@ -50,7 +50,7 @@ const typeDefs = gql`
   type User {
     id: ID
     name: String
-    lastName: String
+    lastname: String
     email: String
     age: Int
     createAt: String
@@ -77,7 +77,7 @@ const typeDefs = gql`
 
   input ClientInput {
     name: String!
-    lastName: String!
+    lastname: String!
     email: String!
     company: String!
     phone: String
@@ -115,7 +115,7 @@ const typeDefs = gql`
 
   input UserInput {
     name: String!
-    lastName: String!
+    lastname: String!
     email: String!
     password: String!
     age: Int!
