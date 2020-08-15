@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useMutation, gql } from '@apollo/client';
@@ -18,6 +19,11 @@ const NEW_ACCOUNT = gql`
 `;
 
 function NewAccount() {
+  const [message, setMessage] = useState(null);
+  const [good, setGood] = useState(false);
+  
+  //Next.js routing
+  const router = useRouter();
 
   //New Account Mutation
   const [newUser] = useMutation(NEW_ACCOUNT);
@@ -45,7 +51,7 @@ function NewAccount() {
       const { name, lastname, age, email, password } = values;
 
       try {
-        await newUser({
+        const { data } = await newUser({
           variables: {
             input: {
               name,
@@ -56,8 +62,25 @@ function NewAccount() {
             },
           },
         });
+
+        //User created succesfully
+        setGood(true);
+        setMessage(`User ${data.newUser.name} was created!`);
+
+        setTimeout(() => {
+          setMessage(null);
+          setGood(false);
+          
+          //Redirect to login page
+          router.push('/login');
+        }, 3000);
+
       } catch (err) {
-        console.error(err)
+        setMessage(err.message);
+        console.error(err.message);
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
       }
     },
   });
@@ -92,9 +115,26 @@ function NewAccount() {
     </div>
   );
 
+  const showMessage = () => {
+    return (
+      good ? (
+        <div className="bg-green-200 text-green-700 font-bold py-2 px-3 w-full my-3 max-w-sm text-center mx-auto">
+          <p>{message.toUpperCase()}</p>
+        </div>
+      ) : (
+          <div className="bg-red-200 text-red-700 font-bold py-2 px-3 w-full my-3 max-w-sm text-center mx-auto">
+            <p>{message.toUpperCase()}</p>
+          </div>
+        )
+    );
+  };
+
   return (
     <>
       <Layout>
+
+        {message && showMessage()}
+
         <h1 className="text-center text-2xl text-white font-light">
           New Account
         </h1>
