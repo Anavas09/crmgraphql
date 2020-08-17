@@ -16,13 +16,14 @@ connectDB();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({req}) => {
+  context: ({ req }) => {
+    console.log(req.headers);
     const token = req.headers['authorization'] || '';
 
     if(token){
       try {
-        const user = jwt.verify(token, process.env.SECRET_WORD);
-
+        const user = jwt.verify(token.replace('Bearer ', ''), process.env.SECRET_WORD);
+        console.log(user);
         return {
           user
         }
