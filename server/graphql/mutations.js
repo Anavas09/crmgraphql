@@ -9,9 +9,9 @@ const User = require("../database/models/User");
 const secretWord = process.env.SECRET_WORD;
 
 const createToken = (user, secretWord, expiresIn) => {
-  const { id, email, name, lastName } = user;
+  const { id, email, name, lastname } = user;
 
-  return jwt.sign({ id, email, name, lastName }, secretWord, { expiresIn });
+  return jwt.sign({ id, email, name, lastname }, secretWord, { expiresIn });
 };
 
 /**
