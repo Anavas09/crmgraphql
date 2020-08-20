@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { gql, useQuery } from '@apollo/client';
 
 import Layout from '../components/Layout';
@@ -22,6 +23,9 @@ function Index() {
   console.info(loading);
   console.error(error);
 
+  //Next Routing
+  const router = useRouter();
+
   if (loading) {
     return (
       <Layout>
@@ -30,7 +34,9 @@ function Index() {
     );
   }
 
-  const clients = 'h';
+  if (!data.getClientsSeller) {
+    router.push('/login');
+  }
 
   return (
     <Layout>
@@ -39,7 +45,7 @@ function Index() {
       {data.getClientsSeller && (
         <ClientsTable getClientsSeller={data.getClientsSeller} />
       )}
-      
+
     </Layout>
   );
 }
