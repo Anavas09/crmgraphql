@@ -182,7 +182,7 @@ const typeDefs = gql`
     """
     Return User data by token.
     """
-    getUser(token: String!): User
+    getUser: User
     """
     Return all users in the database.
     """

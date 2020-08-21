@@ -34,7 +34,7 @@ require("dotenv").config({
 
 const resolvers = {
   Query: {
-    getUser: (_, { token }) => getUser(token),
+    getUser: (_, {}, ctx) => getUser(ctx),
     getUsers: () => getUsers(),
     getClient: (_, { id }, ctx) => getClient(id, ctx),
     getClients: () => getClients(),

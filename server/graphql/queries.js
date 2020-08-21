@@ -185,10 +185,8 @@ const getProducts = async () => {
  * @returns
  * User id
  */
-const getUser = async token => {
-  const userId = await jwt.verify(token, secretWord);
-  //const userData = User.findById(userId);
-  return userId;
+const getUser = async ctx => {
+  return ctx.user;
 };
 
 /**
