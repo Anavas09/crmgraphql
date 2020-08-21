@@ -3,6 +3,7 @@ import { gql, useQuery } from '@apollo/client';
 
 import Layout from '../components/Layout';
 import ClientsTable from '../components/ClientsTable';
+import Link from 'next/link';
 
 const GET_CLIENTS_SELLER = gql`
   {
@@ -17,6 +18,7 @@ const GET_CLIENTS_SELLER = gql`
 `;
 
 function Index() {
+  debugger
   //Apollo Query
   const { data, loading, error } = useQuery(GET_CLIENTS_SELLER);
   console.log(data);
@@ -34,18 +36,23 @@ function Index() {
     );
   }
 
-  if (!data.getClientsSeller) {
+  /*if (!data.getClientsSeller) {
     router.push('/login');
-  }
+  }*/
 
   return (
     <Layout>
       <h1 className="text-2xl text-gray-800 font-light">Clients</h1>
 
+      <Link href="/newclient">
+        <a className="bg-green-800 py-2 px-5 mt-5 inline-block w-full sm:w-auto text-white text-xs font-bold rounded uppercase shadow-md hover:bg-green-900">
+          New Client
+        </a>
+      </Link>
+
       {data.getClientsSeller && (
         <ClientsTable getClientsSeller={data.getClientsSeller} />
       )}
-
     </Layout>
   );
 }
