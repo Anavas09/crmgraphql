@@ -18,7 +18,7 @@ const GET_CLIENTS_SELLER = gql`
 `;
 
 function Index() {
-  debugger
+  debugger;
   //Apollo Query
   const { data, loading, error } = useQuery(GET_CLIENTS_SELLER);
   console.log(data);
@@ -44,11 +44,13 @@ function Index() {
     <Layout>
       <h1 className="text-2xl text-green-800 font-light">Clients</h1>
 
-      <Link href="/newclient">
-        <a className="bg-green-800 py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
-          New Client
-        </a>
-      </Link>
+      {data.getClientsSeller.length > 0 && (
+        <Link href="/newclient">
+          <a className="bg-green-800 py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
+            New Client
+          </a>
+        </Link>
+      )}
 
       {data.getClientsSeller && (
         <ClientsTable getClientsSeller={data.getClientsSeller} />

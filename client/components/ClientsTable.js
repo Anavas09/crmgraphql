@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 function ClientsTable({ getClientsSeller }) {
   return getClientsSeller && getClientsSeller.length > 0 ? (
@@ -25,9 +26,17 @@ function ClientsTable({ getClientsSeller }) {
       </tbody>
     </table>
   ) : (
-    <h1 className="text-center text-2xl text-green-800 font-bold">
-      Nothing to see here!
-    </h1>
+    <>
+      <h1 className="text-center text-2xl text-green-800 font-bold">
+        Nothing to see here!
+      </h1>
+
+      <Link href="/newclient">
+        <a className="bg-green-800 flex justify-center py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
+          Add a new Client
+        </a>
+      </Link>
+    </>
   );
 }
 
