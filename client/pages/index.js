@@ -42,10 +42,10 @@ function Index() {
 
   return (
     <Layout>
-      <h1 className="text-2xl text-gray-800 font-light">Clients</h1>
+      <h1 className="text-2xl text-green-800 font-light">Clients</h1>
 
       <Link href="/newclient">
-        <a className="bg-green-800 py-2 px-5 mt-5 inline-block w-full sm:w-auto text-white text-xs font-bold rounded uppercase shadow-md hover:bg-green-900">
+        <a className="bg-green-800 py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
           New Client
         </a>
       </Link>
