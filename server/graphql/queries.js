@@ -9,8 +9,6 @@ require("dotenv").config({
   path: "variables.env",
 });
 
-const secretWord = process.env.SECRET_WORD;
-
 /**
  * Get Client Information
  * @param {String} id
@@ -180,10 +178,10 @@ const getProducts = async () => {
 
 /**
  *
- * @param {token} token
- * A valid json web token
+ * @param {ctx} ctx
+ * The GraphQL context
  * @returns
- * User id
+ * User data
  */
 const getUser = async ctx => {
   return ctx.user;
