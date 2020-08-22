@@ -62,13 +62,13 @@ function NewAccountForm({formik}) {
           className="block text-green-700 text-sm font-bold mb-2"
           htmlFor="lastname"
         >
-          Last Name
+          Lastname
         </label>
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="lastname"
           type="text"
-          placeholder="Last Name"
+          placeholder="Lastname"
           value={formik.values.lastname}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
