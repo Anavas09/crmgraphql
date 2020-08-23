@@ -2,22 +2,13 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import Layout from '../components/Layout';
 import NewAccountForm from '../components/NewAccountForm';
 
-const NEW_ACCOUNT = gql`
-  mutation newUser($input: UserInput) {
-    newUser(input: $input) {
-      id
-      name
-      lastname
-      age
-      email
-    }
-  }
-`;
+//Mutation
+import { NEW_ACCOUNT } from '../graphql/mutations';
 
 function NewAccount() {
   const [message, setMessage] = useState(null);

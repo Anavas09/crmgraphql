@@ -1,21 +1,13 @@
 import { useRouter } from 'next/router';
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import Layout from '../components/Layout';
 import ClientsTable from '../components/ClientsTable';
 import Link from 'next/link';
 
-const GET_CLIENTS_SELLER = gql`
-  {
-    getClientsSeller {
-      id
-      name
-      lastname
-      company
-      email
-    }
-  }
-`;
+//Query
+import { GET_CLIENTS_SELLER } from '../graphql/queries';
+
 
 function Index() {
   debugger;

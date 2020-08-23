@@ -2,37 +2,16 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import Layout from '../components/Layout';
 import NewClientForm from '../components/NewClientForm';
 
-//Mutation
-const NEW_CLIENT = gql`
-  mutation newClient($input: ClientInput) {
-    newClient(input: $input) {
-      id
-      name
-      lastname
-      email
-      company
-      phone
-    }
-  }
-`;
-
 //Query
-const GET_CLIENTS_SELLER = gql`
-  {
-    getClientsSeller {
-      id
-      name
-      lastname
-      company
-      email
-    }
-  }
-`;
+import { GET_CLIENTS_SELLER } from '../graphql/queries';
+
+//Mutation
+import { NEW_CLIENT } from '../graphql/mutations';
 
 function NewClient() {
   const [message, setMessage] = useState(null);

@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 
 import Layout from '../components/Layout';
 
-const AUTH_USER = gql`
-  mutation authUser($input: AuthUserInput) {
-    authUser(input: $input) {
-      token
-    }
-  }
-`;
+//Mutation
+import { AUTH_USER } from '../graphql/mutations';
 
 function Login() {
   const [message, setMessage] = useState(null);
