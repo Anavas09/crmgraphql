@@ -1,7 +1,30 @@
 import React from 'react';
 import Link from 'next/link';
+import Swal from 'sweetalert2';
 
 function ClientsTable({ getClientsSeller }) {
+
+  //Delete Client
+  const confirmDeleteClient = id => {
+    Swal.fire({
+      title: '¿Are you sure?',
+      text: "You wont't be able to reverse this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Delete it'
+    }).then(res => {
+      if (res.value) {
+        Swal.fire(
+          `Deleted! ${id}`,
+          'Client has been remove from the list',
+          'success'
+        )
+      }
+    });
+  };
+
   return getClientsSeller && getClientsSeller.length > 0 ? (
     <table className="table-auto shadow-md mt-10 w-full w-lg">
       <thead className="bg-green-800">
@@ -9,6 +32,7 @@ function ClientsTable({ getClientsSeller }) {
           <th className="w-1/5 py-2">Name</th>
           <th className="w-1/5 py-2">Company</th>
           <th className="w-1/5 py-2">Email</th>
+          <th className="w-1/5 py-2">Delete</th>
         </tr>
       </thead>
       <tbody className="bg-white">
@@ -20,6 +44,26 @@ function ClientsTable({ getClientsSeller }) {
               </td>
               <td className="border px-4 py-2">{client.company}</td>
               <td className="border px-4 py-2">{client.email}</td>
+              <td className="border px-4 py-2">
+                <button
+                  className="flex justify-center items-center bg-red-800 py-2 px-4 w-full text-white rounded text-xs uppercase font-bold"
+                  type="button"
+                  onClick={() => confirmDeleteClient(client.id)}
+                >
+                  Delete
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    className="w-8 h-8 ml-2"
+                  >
+                    <path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </button>
+              </td>
             </tr>
           );
         })}
