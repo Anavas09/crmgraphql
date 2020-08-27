@@ -33,8 +33,15 @@ const NEW_CLIENT = gql`
   }
 `;
 
+const DELETE_CLIENT = gql`
+  mutation deleteClient($id: ID!) {
+    deleteClient(id: $id)
+  }
+`;
+
 export {
   AUTH_USER,
+  DELETE_CLIENT,
   NEW_ACCOUNT,
   NEW_CLIENT
 }

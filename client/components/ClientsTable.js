@@ -1,11 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
+import { useMutation } from '@apollo/client';
+
+import { DELETE_CLIENT } from '../graphql/mutations';
 
 function ClientsTable({ getClientsSeller }) {
 
+  //Delete client mutation
+  const [deleteClient] = useMutation(DELETE_CLIENT);
+
   //Delete Client
-  const confirmDeleteClient = id => {
+  const confirmDeleteClient = client => {
     Swal.fire({
       title: '¿Are you sure?',
       text: "You wont't be able to reverse this!",
@@ -14,15 +20,31 @@ function ClientsTable({ getClientsSeller }) {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Delete it'
-    }).then(res => {
+    }).then( async res => {
       if (res.value) {
-        Swal.fire(
-          `Deleted! ${id}`,
-          'Client has been remove from the list',
-          'success'
-        )
+        try {
+
+          //Delete by ID
+          const { data } = await deleteClient({
+            variables: {
+              id: client.id
+            }
+          })
+
+          console.log(data);
+
+          //Show alert
+          Swal.fire(
+            `Deleted!`,
+            data.deleteClient.replace('Client deleted', `Client ${client.name} ${client.lastname} has been remove from list`),
+            'success'
+          )
+          
+        } catch (error) {
+          
+        }
       }
-    });
+    })
   };
 
   return getClientsSeller && getClientsSeller.length > 0 ? (
@@ -48,7 +70,7 @@ function ClientsTable({ getClientsSeller }) {
                 <button
                   className="flex justify-center items-center bg-red-800 py-2 px-4 w-full text-white rounded text-xs uppercase font-bold"
                   type="button"
-                  onClick={() => confirmDeleteClient(client.id)}
+                  onClick={() => confirmDeleteClient(client)}
                 >
                   Delete
                   <svg
