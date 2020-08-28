@@ -3,7 +3,37 @@ import Link from 'next/link';
 import Swal from 'sweetalert2';
 import { useMutation } from '@apollo/client';
 
+//Query
+import { GET_CLIENTS_SELLER } from '../graphql/queries';
+
+//Mutation
 import { DELETE_CLIENT } from '../graphql/mutations';
+
+const newClient = {
+  company: "Co Mpany",
+  email: "cliendddt@client.com",
+  id: "5f495f3ed8ad21048837222a",
+  lastname: "Lastname Client",
+  name: "awwawawgwag",
+  phone: "",
+__typename: "Client",
+};
+
+/*
+  <button
+    className="dim pointer"
+    onClick={() => {
+        deleteItem({ variables: { id }, 
+        update: cache => {
+          const data = cache.readQuery({ query: GET_ITEMS });
+          data.items = data.items.filter(({id: itemId}) => itemId !== id);
+          cache.writeQuery({ query: GET_ITEMS }, data);
+        }});
+    }}
+  >
+    delete
+  </button>
+*/
 
 function ClientsTable({ getClientsSeller }) {
 
@@ -20,23 +50,36 @@ function ClientsTable({ getClientsSeller }) {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Delete it'
-    }).then( async res => {
+    }).then(async res => {
+      console.log(res);
       if (res.value) {
         try {
-
+          const { id, name, lastname } = client;
           //Delete by ID
           const { data } = await deleteClient({
             variables: {
-              id: client.id
+              id
+            },
+            update(cache) {
+              //Get the object from cache that you want to update
+              const { getClientsSeller } = cache.readQuery({ query: GET_CLIENTS_SELLER });
+
+              //Rewrite the cache (The cache is inmutable. Should never be modified)
+              cache.writeQuery({
+                query: GET_CLIENTS_SELLER,
+                data: {
+                  getClientsSeller: getClientsSeller.filter(actualClient => actualClient.id !== id)
+                }
+              });
             }
-          })
+          });
 
           console.log(data);
 
           //Show alert
           Swal.fire(
             `Deleted!`,
-            data.deleteClient.replace('Client deleted', `Client ${client.name} ${client.lastname} has been remove from list`),
+            data.deleteClient.replace('Client deleted', `Client ${name} ${lastname} has been remove from list`),
             'success'
           )
           
