@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router'; 
 
 //Query
 import { GET_CLIENTS_SELLER } from '../graphql/queries';
@@ -68,6 +69,12 @@ function ClientsTable({ getClientsSeller }) {
       };
     });
   };
+  
+  const router = useRouter();
+
+  const editClient = id => {
+    router.push(`/editclient/${id}`);
+  };
 
   return getClientsSeller && getClientsSeller.length > 0 ? (
     <table className="table-auto shadow-md mt-10 w-full w-lg">
@@ -77,6 +84,7 @@ function ClientsTable({ getClientsSeller }) {
           <th className="w-1/5 py-2">Company</th>
           <th className="w-1/5 py-2">Email</th>
           <th className="w-1/5 py-2">Delete</th>
+          <th className="w-1/5 py-2">Edit</th>
         </tr>
       </thead>
       <tbody className="bg-white">
@@ -90,11 +98,31 @@ function ClientsTable({ getClientsSeller }) {
               <td className="border px-4 py-2">{client.email}</td>
               <td className="border px-4 py-2">
                 <button
-                  className="flex justify-center items-center bg-red-800 py-2 px-4 w-full text-white rounded text-xs uppercase font-bold"
+                  className="flex justify-center items-center bg-red-800 py-2 px-4 w-full text-white rounded text-xs uppercase font-bold hover:bg-red-900"
                   type="button"
                   onClick={() => confirmDeleteClient(client)}
                 >
                   Delete
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    className="w-8 h-8 ml-2"
+                  >
+                    <path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </button>
+              </td>
+              <td className="border px-4 py-2">
+                <button
+                  className="flex justify-center items-center bg-green-600 py-2 px-4 w-full text-white rounded text-xs uppercase font-bold hover:bg-green-700"
+                  type="button"
+                  onClick={() => editClient(client.id)}
+                >
+                  Edit
                   <svg
                     fill="none"
                     stroke="currentColor"
