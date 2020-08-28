@@ -9,32 +9,6 @@ import { GET_CLIENTS_SELLER } from '../graphql/queries';
 //Mutation
 import { DELETE_CLIENT } from '../graphql/mutations';
 
-const newClient = {
-  company: "Co Mpany",
-  email: "cliendddt@client.com",
-  id: "5f495f3ed8ad21048837222a",
-  lastname: "Lastname Client",
-  name: "awwawawgwag",
-  phone: "",
-__typename: "Client",
-};
-
-/*
-  <button
-    className="dim pointer"
-    onClick={() => {
-        deleteItem({ variables: { id }, 
-        update: cache => {
-          const data = cache.readQuery({ query: GET_ITEMS });
-          data.items = data.items.filter(({id: itemId}) => itemId !== id);
-          cache.writeQuery({ query: GET_ITEMS }, data);
-        }});
-    }}
-  >
-    delete
-  </button>
-*/
-
 function ClientsTable({ getClientsSeller }) {
 
   //Delete client mutation
@@ -51,7 +25,6 @@ function ClientsTable({ getClientsSeller }) {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Delete it'
     }).then(async res => {
-      console.log(res);
       if (res.value) {
         try {
           const { id, name, lastname } = client;
@@ -74,8 +47,6 @@ function ClientsTable({ getClientsSeller }) {
             }
           });
 
-          console.log(data);
-
           //Show alert
           Swal.fire(
             `Deleted!`,
@@ -83,11 +54,19 @@ function ClientsTable({ getClientsSeller }) {
             'success'
           )
           
-        } catch (error) {
+        } catch (err) {
+
+          //Show alert
+          Swal.fire({
+            title: 'Error',
+            text: err.message,
+            icon: 'error',
+            timer: 2000
+          })
           
-        }
-      }
-    })
+        };
+      };
+    });
   };
 
   return getClientsSeller && getClientsSeller.length > 0 ? (
