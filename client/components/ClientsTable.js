@@ -51,7 +51,7 @@ function ClientsTable({ getClientsSeller }) {
           //Show alert
           Swal.fire(
             `Deleted!`,
-            data.deleteClient.replace('Client deleted', `Client ${name} ${lastname} has been remove from list`),
+            data.deleteClient.replace('Client deleted', `Client ${name} ${lastname}, has been remove from list`),
             'success'
           )
           

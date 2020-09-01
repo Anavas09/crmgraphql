@@ -39,9 +39,22 @@ const DELETE_CLIENT = gql`
   }
 `;
 
+const UPDATE_CLIENT = gql`
+  mutation updateClient($id: ID!, $input: ClientInput) {
+    updateClient(id: $id, input: $input) {
+      id
+      name
+      lastname
+      email
+      company
+    }
+  }
+`;
+
 export {
   AUTH_USER,
   DELETE_CLIENT,
   NEW_ACCOUNT,
-  NEW_CLIENT
+  NEW_CLIENT,
+  UPDATE_CLIENT
 }
