@@ -28,7 +28,15 @@ function EditClient() {
 
   const [updateClient] = useMutation(UPDATE_CLIENT);
 
-  if (loading) return 'Loading...!';
+  if (loading) {
+    return (
+      <Layout>
+        <h1 className="text-center text-2xl text-gray-800 font-light">
+          Loading...
+        </h1>
+      </Layout>
+    );
+  };
 
   const { getClient } = data;
 
@@ -51,8 +59,8 @@ function EditClient() {
 
       //Show alert
       Swal.fire(
-        `Update!`,
-        'Client information was succesfully update',
+        `Updated!`,
+        'Client information was succesfully updated',
         'success'
       );
 

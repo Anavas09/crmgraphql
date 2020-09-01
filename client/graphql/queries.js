@@ -24,6 +24,17 @@ const GET_CLIENTS_SELLER = gql`
   }
 `;
 
+const GET_PRODUCTS = gql`
+  {
+    getProducts {
+      id
+      name
+      stock
+      price
+    }
+  }
+`;
+
 const GET_USER = gql`
   {
     getUser {
@@ -37,5 +48,6 @@ const GET_USER = gql`
 export {
   GET_CLIENT,
   GET_CLIENTS_SELLER,
+  GET_PRODUCTS,
   GET_USER
 }

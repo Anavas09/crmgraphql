@@ -13,9 +13,6 @@ function Index() {
   debugger;
   //Apollo Query
   const { data, loading, error } = useQuery(GET_CLIENTS_SELLER);
-  console.log(data);
-  console.info(loading);
-  console.error(error);
 
   //Next Routing
   const router = useRouter();
@@ -23,7 +20,9 @@ function Index() {
   if (loading) {
     return (
       <Layout>
-        <h1 className="text-2xl text-gray-800 font-light">Loading...</h1>
+        <h1 className="text-center text-2xl text-gray-800 font-light">
+          Loading...
+        </h1>
       </Layout>
     );
   }

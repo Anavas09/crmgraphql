@@ -51,10 +51,41 @@ const UPDATE_CLIENT = gql`
   }
 `;
 
+const NEW_PRODUCT = gql`
+  mutation newProduct($input: ProductInput) {
+    newProduct(input: $input) {
+      id
+      name
+      price
+      stock
+    }
+  }
+`;
+
+const UPDATE_PRODUCT = gql`
+  mutation updateProduct($id: ID!, $input: ProductInput) {
+    updateProduct(id: $id, input: $input) {
+      id
+      name
+      price
+      stock
+    }
+  }
+`;
+
+const DELETE_PRODUCT = gql`
+  mutation deleteProduct($id: ID!) {
+    deleteProduct(id: $id)
+  }
+`;
+
 export {
   AUTH_USER,
   DELETE_CLIENT,
   NEW_ACCOUNT,
   NEW_CLIENT,
-  UPDATE_CLIENT
+  UPDATE_CLIENT,
+  NEW_PRODUCT,
+  UPDATE_PRODUCT,
+  DELETE_PRODUCT
 }

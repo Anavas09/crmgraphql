@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { useMutation } from '@apollo/client';
 
 import Layout from '../components/Layout';
-import NewClientForm from '../components/NewClientForm';
+import NewClientForm from '../components/forms/NewClientForm';
 
 //Query
 import { GET_CLIENTS_SELLER } from '../graphql/queries';
