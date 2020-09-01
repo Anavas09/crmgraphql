@@ -30,6 +30,16 @@ function Products() {
 
   return getProducts && getProducts.length > 0 ? (
     <Layout>
+      <h1 className="text-2xl text-green-800 font-light">Products</h1>
+
+      {getProducts.length > 0 && (
+        <Link href="/newproduct">
+          <a className="bg-green-800 py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
+            New Product
+          </a>
+        </Link>
+      )}
+
       <table className="table-auto shadow-md mt-10 w-full w-lg">
         <thead className="bg-green-800">
           <tr className="text-white">
