@@ -55,18 +55,13 @@ function ProductsTable({ product }) {
             `Deleted!`,
             data.deleteProduct.replace(
               'Product deleted',
-              `Product ${name.uppercase()}, has been remove from list`
+              `Product ${name.toUpperCase().bold()}, has been remove from list`
             ),
             'success'
           );
         } catch (err) {
           //Show alert
-          Swal.fire({
-            title: 'Error',
-            text: err.message,
-            icon: 'error',
-            timer: 2000,
-          });
+          Swal.fire('Error',err.message,'error');
         }
       }
     });
