@@ -66,7 +66,7 @@ function EditProduct() {
       router.push('/products');
     } catch (err) {
       //Show alert
-      Swal.fire('Error!', err, 'error');
+      Swal.fire('Error!', err.message, 'error');
       console.error(err);
     }
   };
@@ -145,7 +145,7 @@ function EditProduct() {
                     <input
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="stock"
-                      type="text"
+                      type="number"
                       placeholder="Stock"
                       value={props.values.stock}
                       onChange={props.handleChange}
@@ -165,7 +165,7 @@ function EditProduct() {
                     <input
                       className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                       id="price"
-                      type="price"
+                      type="number"
                       placeholder="Price"
                       value={props.values.price}
                       onChange={props.handleChange}
