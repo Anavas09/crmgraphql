@@ -5,9 +5,15 @@ export default (state, action) => {
     case SET_CLIENT:
       return {
         ...state,
-        client: action.payload
-      }
-  
+        client: action.payload,
+      };
+    
+    case SET_PRODUCT:
+      return {
+        ...state,
+        products: action.payload,
+      };
+
     default:
       return state;
   }
