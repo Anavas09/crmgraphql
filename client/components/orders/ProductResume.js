@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+//Order Context
+import OrderContext from '../../context/orders/OrderContext';
+
 function ProductResume({ product }) {
+  const [quantity, setQuantity] = useState(0);
+
+  //Order Context. Use context and get functions and values
+  const orderContext = useContext(OrderContext);
+  const { productQuantity } = orderContext;
+
+  useEffect(() => {
+    addQuantityToProduct();
+  }, [quantity]);
+
+  const addQuantityToProduct = () => {
+    const newProduct = { ...product, quantity: Number(quantity) };
+    productQuantity(newProduct);
+  };
   
   const { name, price } = product;
 
@@ -14,8 +31,10 @@ function ProductResume({ product }) {
 
       <input
         type="number"
+        value={quantity}
         placeholder="Quantity"
         className="shadow apperance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline md:ml-4"
+        onChange={e => setQuantity(e.target.value)}
       />
     </div>
   )

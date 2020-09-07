@@ -8,7 +8,7 @@ import OrderContext from '../../context/orders/OrderContext';
 //Query
 import { GET_PRODUCTS } from '../../graphql/queries';
 
-function SetClient() {
+function SetProducts() {
   const [product, setProduct] = useState({});
 
   //Order Context. Use context and get functions and values
@@ -46,4 +46,4 @@ function SetClient() {
   );
 }
 
-export default SetClient;
+export default SetProducts;

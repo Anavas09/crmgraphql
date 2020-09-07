@@ -32,11 +32,22 @@ function OrderState({ children }) {
     });
   };
 
+  /**Modify the product object adding quantity property*/
+  const productQuantity = productWithQuantity => {
+    console.log(productWithQuantity);
+    dispatch({
+      type: PRODUCT_QUANTITY,
+      payload: productWithQuantity,
+    });
+  };
+
   return (
     <OrderContext.Provider
       value={{
+        products: state.products,
         addClient,
-        addProduct
+        addProduct,
+        productQuantity
       }}
     >
       {children}
