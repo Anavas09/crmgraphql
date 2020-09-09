@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Select from 'react-select';
 import { useQuery } from '@apollo/client';
 
@@ -9,18 +9,13 @@ import OrderContext from '../../context/orders/OrderContext';
 import { GET_PRODUCTS } from '../../graphql/queries';
 
 function SetProducts() {
-  const [product, setProduct] = useState({});
 
   //Order Context. Use context and get functions and values
   const orderContext = useContext(OrderContext);
   const { addProduct } = orderContext;
 
-  useEffect(() => {
-    addProduct(product);
-  }, [product]);
-
   const setProducts = product => {
-    setProduct(product);
+    addProduct(product);
   };
 
   //Apollo Query. Get Clients form DB.

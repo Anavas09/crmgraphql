@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Select from 'react-select';
 import { useQuery } from '@apollo/client';
 
@@ -9,18 +9,13 @@ import OrderContext from '../../context/orders/OrderContext';
 import { GET_CLIENTS_SELLER } from '../../graphql/queries';
 
 function SetClient() {
-  const [client, setClient] = useState({});
 
   //Order Context. Use context and get functions and values
   const orderContext = useContext(OrderContext);
   const { addClient } = orderContext;
 
-  useEffect(() => {
-    addClient(client);
-  }, [client]);
-
   const setClientOrders = client => {
-    setClient(client);
+    addClient(client);
   };
 
   //Apollo Query. Get Clients form DB.

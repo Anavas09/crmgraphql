@@ -9,7 +9,7 @@ function ProductResume({ product }) {
 
   //Order Context. Use context and get functions and values
   const orderContext = useContext(OrderContext);
-  const { productQuantity } = orderContext;
+  const { productQuantity, updateTotal } = orderContext;
 
   useEffect(() => {
     addQuantityToProduct();
@@ -18,6 +18,7 @@ function ProductResume({ product }) {
   const addQuantityToProduct = () => {
     const newProduct = { ...product, quantity: Number(quantity) };
     productQuantity(newProduct);
+    updateTotal();
   };
   
   const { name, price } = product;
