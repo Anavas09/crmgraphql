@@ -51,6 +51,14 @@ const UPDATE_CLIENT = gql`
   }
 `;
 
+const NEW_ORDER = gql`
+  mutation newOrder($input: OrderInput) {
+    newOrder(input: $input) {
+      id
+    }
+  }
+`;
+
 const NEW_PRODUCT = gql`
   mutation newProduct($input: ProductInput) {
     newProduct(input: $input) {
@@ -85,6 +93,7 @@ export {
   NEW_ACCOUNT,
   NEW_CLIENT,
   UPDATE_CLIENT,
+  NEW_ORDER,
   NEW_PRODUCT,
   UPDATE_PRODUCT,
   DELETE_PRODUCT
