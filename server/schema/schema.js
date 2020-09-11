@@ -1,7 +1,6 @@
 const { gql } = require('apollo-server');
 
 const typeDefs = gql`
-
   """
   Client type.
   """
@@ -31,6 +30,8 @@ const typeDefs = gql`
   type OrderGroup {
     id: ID
     quantity: Int
+    name: String
+    price: Float
   }
 
   """
@@ -67,7 +68,7 @@ const typeDefs = gql`
     total: Float
     client: [Client]
   }
-  
+
   type TopSeller {
     total: Float
     seller: [User]
@@ -88,6 +89,8 @@ const typeDefs = gql`
   input ProductOrderInput {
     id: ID!
     quantity: Int!
+    name: String
+    price: Float
   }
 
   input OrderInput {
@@ -143,7 +146,6 @@ const typeDefs = gql`
     """
     getClientsSeller: [Client]
 
-
     #Orders
 
     """
@@ -177,7 +179,6 @@ const typeDefs = gql`
     """
     getProduct(id: ID!): Product
 
-
     #User
     """
     Return User data by token.
@@ -187,7 +188,6 @@ const typeDefs = gql`
     Return all users in the database.
     """
     getUsers: [User]
-
 
     #Advanced Search
 
