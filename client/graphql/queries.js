@@ -24,6 +24,35 @@ const GET_CLIENTS_SELLER = gql`
   }
 `;
 
+const GET_ORDERS = gql`
+  {
+    getOrders {
+      id
+      client
+      order {
+        id
+        quantity
+      }
+      seller
+    }
+  }
+`;
+
+const GET_ORDERS_BY_SELLER = gql`
+  {
+    getOrdersBySeller {
+      id
+      order {
+        id
+        quantity
+      }
+      state
+      client
+      total
+    }
+  }
+`;
+
 const GET_PRODUCT = gql`
   query getProduct($id: ID!) {
     getProduct(id: $id) {
@@ -58,6 +87,8 @@ const GET_USER = gql`
 export {
   GET_CLIENT,
   GET_CLIENTS_SELLER,
+  GET_ORDERS,
+  GET_ORDERS_BY_SELLER,
   GET_PRODUCT,
   GET_PRODUCTS,
   GET_USER
