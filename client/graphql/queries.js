@@ -44,6 +44,7 @@ const GET_ORDERS_BY_SELLER = gql`
       id
       order {
         id
+        name
         quantity
       }
       state
