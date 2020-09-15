@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useQuery } from '@apollo/client';
 
@@ -9,17 +9,22 @@ import OrderContext from '../../context/orders/OrderContext';
 import { GET_CLIENTS_SELLER } from '../../graphql/queries';
 
 function SetClient() {
+  const [client, setClient] = useState({});
 
   //Order Context. Use context and get functions and values
   const orderContext = useContext(OrderContext);
   const { addClient } = orderContext;
 
-  const setClientOrders = client => {
-    addClient(client);
-  };
-
   //Apollo Query. Get Clients form DB.
   const { data, loading, error } = useQuery(GET_CLIENTS_SELLER);
+
+  useEffect(() => {
+    addClient(client);
+  }, [client]);
+
+  const setClientToOrder = client => {
+    setClient(client);
+  };
 
   return (
     <>
@@ -30,7 +35,7 @@ function SetClient() {
         isLoading={loading}
         className="mt-3"
         options={loading ? null : data.getClientsSeller}
-        onChange={client => setClientOrders(client)}
+        onChange={client => setClientToOrder(client)}
         getOptionValue={options => options.id}
         getOptionLabel={options => options.name}
         placeholder="Search or Choose a Client"
