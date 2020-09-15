@@ -179,7 +179,7 @@ const updateOrder = async (id, input, ctx) => {
 
       //Check if we have stock
       if (article.quantity > product.stock) {
-        throw new Error(`The ${article.quantity} ${product.name} exeded the stock of ${product.stock})`);
+        throw new Error(`${article.quantity} ${product.name} exceed the number in stock of ${product.stock}`);
       } else {
         //Substract the quantity to the stock
         product.stock = product.stock - article.quantity;
