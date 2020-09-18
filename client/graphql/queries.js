@@ -48,7 +48,13 @@ const GET_ORDERS_BY_SELLER = gql`
         name
       }
       state
-      client
+      client {
+        id
+        name
+        lastname
+        email
+        phone
+      }
       total
     }
   }

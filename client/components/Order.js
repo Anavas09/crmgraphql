@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 function Order({ order }) {
-  const { id, client, total, state } = order;
+  const { id, client: {name, lastname, email, phone}, total, state } = order;
   const [orderStatus, setOrderStatus] = useState(state);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function Order({ order }) {
   return (
     <div className="mt-4 bg-white rounded p-6 md:grid md:grid-cols-2 md:gap-4 shadow-lg">
       <div>
-        <p className="font-bold text-gray-800">Client: {client}</p>
+        <p className="font-bold text-gray-800">Client: {name} {lastname}</p>
 
         <h2 className="font-bold text-gray-800 mt-10">Status:</h2>
 
