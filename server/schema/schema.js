@@ -21,9 +21,9 @@ const typeDefs = gql`
     id: ID
     order: [OrderGroup]
     total: Int
-    client: ID
+    client: Client
     seller: ID
-    state: OrderState
+    status: OrderStatus
     date: String
   }
 
@@ -97,10 +97,10 @@ const typeDefs = gql`
     order: [ProductOrderInput]
     total: Float!
     client: ID!
-    state: OrderState
+    status: OrderStatus
   }
 
-  enum OrderState {
+  enum OrderStatus {
     PENDING
     COMPLETE
     CANCELED
@@ -164,9 +164,9 @@ const typeDefs = gql`
     getOrdersBySeller: [Order]
 
     """
-    Return Orders data by state.
+    Return Orders data by status.
     """
-    getOrdersByState(state: String!): [Order]
+    getOrdersByStatus(status: String!): [Order]
 
     #Products
     """

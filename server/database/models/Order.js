@@ -7,7 +7,7 @@ const OrderSchema = new Schema({
   total: { type: Number, required: false },
   client: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Client' },
   seller: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
-  state: { type: String, required: true, trim: true, default: 'PENDING' },
+  status: { type: String, required: true, trim: true, default: 'PENDING' },
   createAt: { type: Date, required: true, default: Date.now() },
 });
 

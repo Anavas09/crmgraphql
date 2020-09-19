@@ -118,7 +118,7 @@ const getOrders = async () => {
  */
 const getOrdersBySeller = async ctx => {
   try {
-    const orders = await Order.find({ seller: ctx.user.id });
+    const orders = await Order.find({ seller: ctx.user.id }).populate('client');
 
     return orders;
   } catch (err) {
@@ -127,17 +127,17 @@ const getOrdersBySeller = async ctx => {
 };
 
 /**
- * Orders list by state
- * @param {String} state
+ * Orders list by status
+ * @param {String} status
  * String with a unique valor (PENDING, COMPLETE, CANCEL)
  * @param {object} ctx
  * Object with the user information
  * @returns
- * Orders list by state
+ * Orders list by status
  */
-const getOrdersByState = async (state, ctx) => {
+const getOrdersByStatus = async (status, ctx) => {
   try {
-    const orders = await Order.find({ seller: ctx.user.id, state });
+    const orders = await Order.find({ seller: ctx.user.id, status });
 
     return orders;
   } catch (err) {
@@ -209,7 +209,7 @@ const getUsers = async () => {
  */
 const getBestClients = async () => {
   const bestClients = await Order.aggregate([
-    { $match: { state: "COMPLETE" } },
+    { $match: { status: "COMPLETE" } },
     {
       $group: {
         _id: "$client",
@@ -242,7 +242,7 @@ const getBestClients = async () => {
  */
 const getBestSellers = async () => {
   const bestSellers = Order.aggregate([
-    { $match: { state: "COMPLETE" } },
+    { $match: { status: "COMPLETE" } },
     {
       $group: {
         _id: "$seller",
@@ -283,7 +283,7 @@ module.exports = {
   getOrder,
   getOrders,
   getOrdersBySeller,
-  getOrdersByState,
+  getOrdersByStatus,
   getProduct,
   getProducts,
   getUser,
