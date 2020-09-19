@@ -47,7 +47,7 @@ const GET_ORDERS_BY_SELLER = gql`
         quantity
         name
       }
-      state
+      status
       client {
         id
         name
