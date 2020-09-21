@@ -11,7 +11,11 @@ import Total from '../components/orders/Total';
 
 import OrderContext from '../context/orders/OrderContext';
 
+//Mutation
 import { NEW_ORDER } from '../graphql/mutations';
+
+//Query
+import { GET_ORDERS_BY_SELLER } from '../graphql/queries';
 
 function NewOrder() {
   const orderContext = useContext(OrderContext);
@@ -29,7 +33,22 @@ function NewOrder() {
   //Next routing
   const router = useRouter();
 
-  const [newOrder] = useMutation(NEW_ORDER);
+  const [newOrder] = useMutation(NEW_ORDER, {
+    update(cache, { data: { newOrder } }) {
+      //Get the object from cache that you want to update
+      const { getOrdersBySeller } = cache.readQuery({
+        query: GET_ORDERS_BY_SELLER,
+      });
+
+      //Rewrite the cache (The cache is inmutable. Should never be modified)
+      cache.writeQuery({
+        query: GET_ORDERS_BY_SELLER,
+        data: {
+          getOrdersBySeller: [...getOrdersBySeller, newOrder],
+        },
+      });
+    },
+  });
 
   const createNewOrder = async () => {
     //Take only the necesary from products to send the mutation
