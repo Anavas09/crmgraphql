@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Bar,
   BarChart,
@@ -16,7 +16,14 @@ import { GET_BEST_SELLERS } from '../graphql/queries';
 
 function BestSellers() {
 
-  const { data, loading, error } = useQuery(GET_BEST_SELLERS);
+  const { data, loading, error, startPolling, stopPolling } = useQuery(GET_BEST_SELLERS);
+
+  useEffect(() => {
+    startPolling(1000);
+    return () => {
+      stopPolling()
+    }
+  }, [startPolling, stopPolling]);
 
   if (loading) {
     return (
@@ -34,6 +41,7 @@ function BestSellers() {
 
   const graphSeller = [];
 
+  //Recharts need a flat array so we do that here
   getBestSellers.map((seller, index) => {
     graphSeller[index] = {
       ...seller.seller[0],
