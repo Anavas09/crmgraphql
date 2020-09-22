@@ -100,13 +100,13 @@ function NewClient() {
 
   return (
     <>
-      <Layout>
+      <Layout title="New Client">
         {message && showMessage()}
         <h1 className="text-2xl text-green-800 font-light">New Client</h1>
 
         <div className="flex justify-center mt-5">
           <div className="w-full max-w-lg">
-            <NewClientForm formik={formik}/>
+            <NewClientForm formik={formik} />
           </div>
         </div>
       </Layout>

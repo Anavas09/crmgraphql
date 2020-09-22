@@ -8,9 +8,7 @@ import Link from 'next/link';
 //Query
 import { GET_CLIENTS_SELLER } from '../graphql/queries';
 
-
 function Index() {
-  debugger;
   //Apollo Query
   const { data, loading, error } = useQuery(GET_CLIENTS_SELLER);
 
@@ -27,17 +25,18 @@ function Index() {
     );
   }
 
-  /*if (!data.getClientsSeller) {
+  if (!data.getClientsSeller) {
     router.push('/login');
-  }*/
+    return null;
+  }
 
   return (
-    <Layout>
+    <Layout title="Clients">
       <h1 className="text-2xl text-green-800 font-light">Clients</h1>
 
       {data.getClientsSeller.length > 0 && (
         <Link href="/newclient">
-          <a className="bg-green-800 py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
+          <a className="bg-green-800 py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900 w-full lg:w-auto text-center">
             New Client
           </a>
         </Link>

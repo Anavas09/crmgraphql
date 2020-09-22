@@ -82,7 +82,7 @@ function EditClient() {
   });
 
   return (
-    <Layout>
+    <Layout title="Edit Client">
       <h1 className="text-2xl text-green-800 font-light">Edit Client</h1>
 
       <div className="flex justify-center mt-5">

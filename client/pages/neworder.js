@@ -77,7 +77,7 @@ function NewOrder() {
   };
 
   return (
-    <Layout>
+    <Layout title="New Order">
       <h1 className="text-2xl text-gray-800 font-light">New Order</h1>
 
       <div className="flex justify-center mt-5">

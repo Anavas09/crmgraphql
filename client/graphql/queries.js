@@ -1,5 +1,17 @@
 import { gql } from '@apollo/client';
 
+const GET_BEST_CLIENTS = gql`
+  {
+    getBestClients {
+      client {
+        name
+        company
+      }
+      total
+    }
+  }
+`;
+
 const GET_BEST_SELLERS = gql`
   {
     getBestSellers {
@@ -105,6 +117,7 @@ const GET_USER = gql`
 `;
 
 export {
+  GET_BEST_CLIENTS,
   GET_BEST_SELLERS,
   GET_CLIENT,
   GET_CLIENTS_SELLER,

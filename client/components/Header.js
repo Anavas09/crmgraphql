@@ -3,14 +3,11 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
 //Query
-import { GET_USER } from '../graphql/queries'; 
+import { GET_USER } from '../graphql/queries';
 
 function Header() {
   //Apollo Query
   const { data, loading, error } = useQuery(GET_USER);
-  console.info(data);
-  console.log(loading);
-  console.error(error);
 
   //Next Routing
   const router = useRouter();
@@ -20,7 +17,8 @@ function Header() {
   }
 
   if (!data.getUser) {
-    return router.push('/login');
+    router.push('/login');
+    return null;
   }
 
   const { name } = data.getUser;
@@ -32,8 +30,8 @@ function Header() {
   };
 
   return (
-    <div className="flex justify-between mb-6">
-      <p className="mr-2 text-green-700">Hello {name}</p>
+    <div className="sm:flex sm:justify-between mb-6">
+      <p className="mr-2 text-green-700 lg:mb-0">Hello {name}</p>
 
       <button
         className="bg-green-800 w-full sm:w-auto py-1 px-2 text-white text-xs font-bold rounded uppercase shadow-md hover:bg-green-900"

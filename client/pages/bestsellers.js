@@ -3,31 +3,36 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  Cell,
   Legend,
   Tooltip,
+  ResponsiveContainer,
   XAxis,
   YAxis,
 } from 'recharts';
 import { useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
 
 import Layout from '../components/Layout';
 import { GET_BEST_SELLERS } from '../graphql/queries';
 
 function BestSellers() {
+  const { data, loading, error, startPolling, stopPolling } = useQuery(
+    GET_BEST_SELLERS
+  );
 
-  const { data, loading, error, startPolling, stopPolling } = useQuery(GET_BEST_SELLERS);
+  //Next Routing
+  const router = useRouter();
 
   useEffect(() => {
     startPolling(1000);
     return () => {
-      stopPolling()
-    }
+      stopPolling();
+    };
   }, [startPolling, stopPolling]);
 
   if (loading) {
     return (
-      <Layout>
+      <Layout title="Best Sellers">
         <h1 className="text-center text-2xl text-gray-800 font-light">
           Loading...
         </h1>
@@ -35,7 +40,10 @@ function BestSellers() {
     );
   }
 
-  console.log(data);
+  if (!data.getBestSellers) {
+    router.push('/login');
+    return null;
+  }
 
   const { getBestSellers } = data;
 
@@ -45,28 +53,30 @@ function BestSellers() {
   getBestSellers.map((seller, index) => {
     graphSeller[index] = {
       ...seller.seller[0],
-      total: seller.total
-    }
-  })
+      total: seller.total,
+    };
+  });
 
   return (
-    <Layout>
+    <Layout title="Best Sellers">
       <h1 className="text-2xl text-gray-800 font-light">Best Sellers</h1>
 
-      <BarChart
-        className="mt-10"
-        width={600}
-        height={400}
-        data={graphSeller}
-        margin={{ top: 5, rigth: 30, left: 20, bottom: 5 }}
-      >
-        <CartesianGrid stokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="total" fill="#22543d" />
-      </BarChart>
+      <ResponsiveContainer width={'99%'} height={550}>
+        <BarChart
+          className="mt-10"
+          width={600}
+          height={500}
+          data={graphSeller}
+          margin={{ top: 5, rigth: 30, left: 20, bottom: 5 }}
+        >
+          <CartesianGrid stokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="total" fill="#22543d" />
+        </BarChart>
+      </ResponsiveContainer>
     </Layout>
   );
 }

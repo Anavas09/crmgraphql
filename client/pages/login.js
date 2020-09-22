@@ -49,9 +49,11 @@ function Login() {
         setGood(true);
         setMessage('Login...');
         
-        const { token } = data.authUser;
-
-        window.localStorage.setItem('token', token);
+        //Set token to localStorage
+        setTimeout(() => {
+          const { token } = data.authUser;
+          window.localStorage.setItem('token', token);
+        }, 1000);
 
         setTimeout(() => {
           setMessage(null);
@@ -98,8 +100,7 @@ function Login() {
 
   return (
     <>
-      <Layout>
-
+      <Layout title="Login">
         {message && showMessage()}
 
         <h1 className="text-center text-2xl text-white font-light">Login</h1>

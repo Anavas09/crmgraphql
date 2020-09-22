@@ -79,8 +79,10 @@ function EditProduct() {
   });
 
   return (
-    <Layout>
-      <h1 className="text-2xl text-center text-green-800 font-bold">Edit Product</h1>
+    <Layout title="Edit Product">
+      <h1 className="text-2xl text-center text-green-800 font-bold">
+        Edit Product
+      </h1>
 
       <div className="flex justify-center mt-5">
         <div className="w-full max-w-lg">
@@ -97,12 +99,11 @@ function EditProduct() {
                 </div>
               );
 
-              const errorStock = props.touched.stock &&
-                props.errors.stock && (
-                  <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-                    <p className="font-bold">{props.errors.stock}</p>
-                  </div>
-                );
+              const errorStock = props.touched.stock && props.errors.stock && (
+                <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+                  <p className="font-bold">{props.errors.stock}</p>
+                </div>
+              );
 
               const errorPrice = props.touched.price && props.errors.price && (
                 <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">

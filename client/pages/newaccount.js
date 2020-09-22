@@ -93,8 +93,7 @@ function NewAccount() {
 
   return (
     <>
-      <Layout>
-
+      <Layout title="New Account">
         {message && showMessage()}
 
         <h1 className="text-center text-2xl text-white font-light">
@@ -103,10 +102,9 @@ function NewAccount() {
 
         <div className="flex justify-center mt-5">
           <div className="w-full max-w-sm">
-            <NewAccountForm formik={formik}/>
+            <NewAccountForm formik={formik} />
           </div>
         </div>
-        
       </Layout>
     </>
   );
