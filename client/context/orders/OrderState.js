@@ -25,7 +25,6 @@ function OrderState({ children }) {
    * Client object
    **/
   const addClient = client => {
-    console.log(client);
     dispatch({
       type: SET_CLIENT,
       payload: client,
@@ -68,7 +67,6 @@ function OrderState({ children }) {
    * New product object with the quantity property
    **/
   const productQuantity = productWithQuantity => {
-    console.log(productWithQuantity);
     dispatch({
       type: PRODUCT_QUANTITY,
       payload: productWithQuantity,

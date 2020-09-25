@@ -37,8 +37,6 @@ function NewAccount() {
       password: Yup.string().required('Add a password').min(6, 'The password must be at least of 6 characters'),
     }),
     onSubmit: async values => {
-      console.log('SUBMITING');
-      console.log(values);
 
       const { name, lastname, age, email, password } = values;
 
@@ -57,7 +55,7 @@ function NewAccount() {
 
         //User created succesfully
         setGood(true);
-        setMessage(`User ${data.newUser.name} was created!`);
+        setMessage(`User ${data.newUser.name} has been created!`);
 
         setTimeout(() => {
           setMessage(null);

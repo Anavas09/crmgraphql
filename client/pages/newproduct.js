@@ -48,8 +48,6 @@ function NewProduct() {
       price: Yup.number().required('Add a price greater than 0'),
     }),
     onSubmit: async values => {
-      console.log('SUBMITING');
-      console.log(values);
 
       const { name, stock, price } = values;
 

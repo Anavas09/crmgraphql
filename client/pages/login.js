@@ -32,7 +32,6 @@ function Login() {
     }),
     onSubmit: async values => {
       const { email, password } = values;
-      console.log(values);
 
       try {
 
@@ -45,7 +44,6 @@ function Login() {
           }
         });
         
-        console.log(data);
         setGood(true);
         setMessage('Login...');
         
