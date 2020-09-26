@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import Layout from '../components/Layout';
 
@@ -59,7 +60,7 @@ function Login() {
 
           //Redirect to client page
           router.push('/');
-        }, 2000);
+        }, 3000);
 
 
       } catch (err) {
@@ -101,7 +102,9 @@ function Login() {
       <Layout title="Login">
         {message && showMessage()}
 
-        <h1 className="text-center text-2xl text-white font-light">Login</h1>
+        <h1 className="text-center font-bold text-2xl text-white font-light">
+          Login
+        </h1>
 
         <div className="flex justify-center mt-5">
           <div className="w-full max-w-sm">
@@ -156,6 +159,13 @@ function Login() {
               />
             </form>
           </div>
+        </div>
+        <div className="flex justify-center mt-4">
+          <Link href="/newaccount">
+            <a className="bg-white w-full max-w-sm p-2 font-bold text-center text-green-600 uppercase rounded shadow-md hover:bg-green-900 hover:text-white">
+              Register
+            </a>
+          </Link>
         </div>
       </Layout>
     </>

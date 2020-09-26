@@ -36,14 +36,24 @@ function Orders() {
     <Layout title="Orders">
       <h1 className="text-2xl text-gray-800 font-light">Orders</h1>
 
-      <Link href="/neworder">
-        <a className="bg-green-800 py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
-          New Order
-        </a>
-      </Link>
+      {getOrdersBySeller.length > 0 && (
+        <Link href="/neworder">
+          <a className="bg-green-800 py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
+            New Order
+          </a>
+        </Link>
+      )}
 
       {getOrdersBySeller.length === 0 ? (
-        <p className="mt-5 text-center text-2xl">There's no orders yet</p>
+        <>
+          <p className="mt-5 text-center text-2xl">There's no orders yet</p>
+
+          <Link href="/neworder">
+            <a className="bg-green-800 flex justify-center py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
+              New Order
+            </a>
+          </Link>
+        </>
       ) : (
         getOrdersBySeller.map(order => {
           return <Order key={order.id} order={order} />;

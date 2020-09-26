@@ -42,8 +42,20 @@ function Index() {
         </Link>
       )}
 
-      {data.getClientsSeller && (
-        <ClientsTable getClientsSeller={data.getClientsSeller} />
+      {data.getClientsSeller.length === 0 ? (
+        <>
+          <p className="mt-5 text-center text-2xl">There's no clients yet</p>
+
+          <Link href="/newclient">
+            <a className="bg-green-800 flex justify-center py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
+              New Clients
+            </a>
+          </Link>
+        </>
+      ) : (
+        data.getClientsSeller && (
+          <ClientsTable getClientsSeller={data.getClientsSeller} />
+        )
       )}
     </Layout>
   );

@@ -4,6 +4,7 @@ import {
   BarChart,
   CartesianGrid,
   Legend,
+  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
@@ -56,24 +57,34 @@ function BestClients() {
     };
   });
 
+  if (graphClient.length === 0) {
+    return (
+      <Layout title="Best Clients">
+        <p className="mt-5 text-center text-2xl">No one has buy something</p>
+      </Layout>
+    );
+  }
+
   return (
     <Layout title="Best Clients">
       <h1 className="text-2xl text-gray-800 font-light">Best Clients</h1>
 
-      <BarChart
-        className="mt-10"
-        width={600}
-        height={400}
-        data={graphClient}
-        margin={{ top: 5, rigth: 30, left: 20, bottom: 5 }}
-      >
-        <CartesianGrid stokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="total" fill="#22543d" />
-      </BarChart>
+      <ResponsiveContainer width={'99%'} height={550}>
+        <BarChart
+          className="mt-10"
+          width={600}
+          height={500}
+          data={graphClient}
+          margin={{ top: 5, rigth: 30, left: 20, bottom: 5 }}
+        >
+          <CartesianGrid stokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="total" fill="#22543d" />
+        </BarChart>
+      </ResponsiveContainer>
     </Layout>
   );
 }

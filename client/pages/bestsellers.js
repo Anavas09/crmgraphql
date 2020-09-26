@@ -57,6 +57,14 @@ function BestSellers() {
     };
   });
 
+  if (graphSeller.length === 0) {
+    return (
+      <Layout title="Best Sellers">
+        <p className="mt-5 text-center text-2xl">No one has sell something</p>
+      </Layout>
+    );
+  }
+
   return (
     <Layout title="Best Sellers">
       <h1 className="text-2xl text-gray-800 font-light">Best Sellers</h1>

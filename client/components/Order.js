@@ -109,7 +109,7 @@ function Order({ order }) {
   };
 
   return (
-    <div className={`${statusColor} border-t-4 mt-4 bg-white rounded p-6 md:grid md:grid-cols-2 md:gap-4 shadow-lg`}>
+    <div className={`${statusColor} border-t-8 mt-4 bg-white rounded p-6 md:grid md:grid-cols-2 md:gap-4 shadow-lg`}>
       <div>
         <p className="font-bold text-gray-800">
           Client: {name} {lastname}
