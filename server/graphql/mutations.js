@@ -212,7 +212,7 @@ const deleteOrder = async (id, ctx) => {
   if (!order) throw new Error("Order not found");
 
   //Check if the user that its trying to delete
-  //this data is the same who created
+  //this data is the same user who created it
   if (order.seller.toString() !== ctx.user.id){
     throw new Error("You dont have credentials for delete this data!")
   };
@@ -272,7 +272,7 @@ const updateClient = async (id, input, ctx) => {
   if (!client) throw new Error("Client not found");
 
   //Check if the user that its trying to edit
-  //this data is the same who created
+  //this data is the same user who created it
   if (client.seller.toString() !== ctx.user.id) {
     throw new Error("You dont have credentials for edit this data!");
   }
@@ -299,7 +299,7 @@ const deleteClient = async (id, ctx) => {
   if (!client) throw new Error("Client not found");
 
   //Check if the user that its trying to delete
-  //this data is the same who created
+  //this data is the same user who created it
   if (client.seller.toString() !== ctx.user.id) {
     throw new Error("You dont have credentials for delete this data!");
   }

@@ -26,7 +26,7 @@ const getClient = async (id, ctx) => {
     if (!client) throw new Error("Client not found");
 
     //Check if the user who its trying to see
-    //this data is the same who created
+    //this data is the same user who created it
     if (client.seller.toString() !== ctx.user.id) {
       throw new Error("You dont have credentials to see this data!");
     }
@@ -86,7 +86,7 @@ const getOrder = async (id, ctx) => {
   if (!order) throw new Error("Order not find");
 
   //Check if the user who its trying to see
-  //this data is the same who created
+  //this data is the same user who created it
   if (order.seller.toString() !== ctx.user.id) {
     throw new Error("You dont have credentials to see this data!");
   }
