@@ -3,8 +3,8 @@ import fetch from 'node-fetch';
 import { setContext } from 'apollo-link-context';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/',
-  fetch
+  uri: 'https://ancient-retreat-92970.herokuapp.com/',
+  fetch,
 });
 
 //Set JSON Web Token to the headers
