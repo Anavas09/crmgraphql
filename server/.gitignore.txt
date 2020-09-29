@@ -2,11 +2,9 @@
 
 # dependencies
 /node_modules
-/client
 server/node_modules
 client/node_modules
 client/.next/
-client/.vercel/
 /.pnp
 .pnp.js
 

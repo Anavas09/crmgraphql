@@ -4,7 +4,7 @@ require("dotenv").config({
   path: "variables.env",
 });
 
-const mongoDB_URI = process.env.PORT !== 4000 ? process.env.DB_MONGO_URI: process.env.LOCAL_DB_MONGO_URI
+const mongoDB_URI = process.env.PORT ? process.env.DB_MONGO_URI : process.env.LOCAL_DB_MONGO_URI;
 
 const connectDB = async () => {
   try {
