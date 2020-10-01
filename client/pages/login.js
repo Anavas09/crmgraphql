@@ -59,7 +59,7 @@ function Login() {
           setGood(false);
 
           //Redirect to client page
-          router.push('/');
+          router.push('/products');
         }, 3000);
 
 

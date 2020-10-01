@@ -12,7 +12,7 @@ function Layout({ children, title }) {
   return (
     <>
       <Head>
-        <title>CRM - {title}</title>
+        <title>CRM - {title ? title : 'Loading...'}</title>
 
         <link
           rel="stylesheet"

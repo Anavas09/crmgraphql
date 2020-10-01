@@ -1,3 +1,4 @@
+import React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 
@@ -34,7 +35,7 @@ function Index() {
     <Layout title="Clients">
       <h1 className="text-2xl text-green-800 font-light">Clients</h1>
 
-      {data.getClientsSeller.length > 0 && (
+      {data && data.getClientsSeller && data.getClientsSeller.length > 0 && (
         <Link href="/newclient">
           <a className="bg-green-800 py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900 w-full lg:w-auto text-center">
             New Client
@@ -42,13 +43,13 @@ function Index() {
         </Link>
       )}
 
-      {data.getClientsSeller.length === 0 ? (
+      {data && data.getClientsSeller && data.getClientsSeller.length === 0 ? (
         <>
           <p className="mt-5 text-center text-2xl">There's no clients yet</p>
 
           <Link href="/newclient">
             <a className="bg-green-800 flex justify-center py-2 px-5 mt-3 mb-3 inline-block w-full sm:w-auto text-white text-sm font-bold rounded uppercase shadow-md hover:bg-green-900">
-              New Clients
+              New Client
             </a>
           </Link>
         </>
